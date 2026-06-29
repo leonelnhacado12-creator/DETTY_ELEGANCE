@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "COLOQUE_AQUI",
-  authDomain: "COLOQUE_AQUI",
-  projectId: "COLOQUE_AQUI",
-  storageBucket: "COLOQUE_AQUI",
-  messagingSenderId: "COLOQUE_AQUI",
-  appId: "COLOQUE_AQUI"
+  apiKey: "AIzaSyCM09wb--IIegeLJt2tpD7O1W6TeoVk",
+  authDomain: "detty-elegance.firebaseapp.com",
+  projectId: "detty-elegance",
+  storageBucket: "detty-elegance.firebasestorage.app",
+  messagingSenderId: "953740667491",
+  appId: "1:953740667491:web:28a8280055d8152974e656"
 };
