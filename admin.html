@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111111">
+    <title>Painel | DETTY ELEGANCE</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Voltar para DETTY ELEGANCE">
+        <span class="brand-mark">DE</span>
+        <span>
+          <strong>DETTY ELEGANCE</strong>
+          <small>Painel de produtos</small>
+        </span>
+      </a>
+
+      <nav class="nav-actions" aria-label="Navegacao do painel">
+        <a href="index.html">Ver loja</a>
+        <button class="secondary-button compact" id="logoutButton" type="button" hidden>Sair</button>
+      </nav>
+    </header>
+
+    <main class="admin-page">
+      <section class="admin-shell">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Administracao</p>
+            <h1>Painel da loja</h1>
+            <p>Adicione artigos com foto, valor, tamanhos/modelos e descricao. Depois de guardar, todos os clientes veem no site.</p>
+          </div>
+        </div>
+
+        <div class="setup-alert" id="setupAlert" hidden>
+          <strong>Falta ligar a base de dados.</strong>
+          <span>Configure o Firebase no ficheiro <code>firebase-config.js</code>. Ate la, este painel fica bloqueado para evitar guardar produtos apenas neste computador.</span>
+        </div>
+
+        <form class="login-panel" id="loginForm">
+          <label>
+            Email do administrador
+            <input id="adminEmail" type="email" autocomplete="email" required placeholder="exemplo@email.com">
+          </label>
+          <label>
+            Senha
+            <input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Senha do Firebase">
+          </label>
+          <button class="primary-button" type="submit">Entrar</button>
+          <p class="form-message" id="loginMessage"></p>
+        </form>
+
+        <section class="dashboard" id="dashboard" hidden>
+          <form class="admin-panel" id="productForm">
+            <div class="form-grid">
+              <label>
+                Nome do artigo
+                <input id="name" required placeholder="Ex: Vestido elegante">
+              </label>
+              <label>
+                Categoria
+                <select id="category" required>
+                  <option>Roupas</option>
+                  <option>Calcados</option>
+                  <option>Bijuterias</option>
+                  <option>Capas de celular</option>
+                  <option>Airpods</option>
+                  <option>Outros</option>
+                </select>
+              </label>
+              <label>
+                Valor
+                <input id="price" required placeholder="Ex: 850 MT">
+              </label>
+              <label>
+                Tamanhos ou modelos
+                <input id="sizes" placeholder="Ex: P, M, G ou iPhone 11">
+              </label>
+              <label class="full">
+                Descricao / detalhes
+                <textarea id="description" rows="4" placeholder="Cor, material, estado, personalizacao, disponibilidade..."></textarea>
+              </label>
+              <label class="full file-picker">
+                Foto do artigo
+                <input id="photo" type="file" accept="image/*" required>
+                <span id="photoName">Escolher imagem</span>
+              </label>
+            </div>
+
+            <div class="preview-row">
+              <img id="photoPreview" alt="Pre-visualizacao do produto">
+              <p>Use fotos claras e bem iluminadas. Depois de guardar, o produto entra no catalogo publico.</p>
+            </div>
+
+            <div class="dialog-actions">
+              <button class="primary-button" id="saveButton" type="submit">Guardar produto</button>
+              <p class="form-message" id="saveMessage"></p>
+            </div>
+          </form>
+
+          <div class="admin-list">
+            <h2>Produtos online</h2>
+            <div id="adminProducts"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>

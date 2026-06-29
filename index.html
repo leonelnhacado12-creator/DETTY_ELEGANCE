@@ -21,9 +21,9 @@
       <nav class="nav-actions" aria-label="Navegacao principal">
         <a href="#produtos">Produtos</a>
         <a href="#contactos">Contactos</a>
-        <button class="icon-button" id="openAdmin" type="button" title="Gerir produtos" aria-label="Gerir produtos">
+        <a class="icon-button" href="admin.html" title="Gerir produtos" aria-label="Gerir produtos">
           <span aria-hidden="true">+</span>
-        </button>
+        </a>
       </nav>
     </header>
 
@@ -91,68 +91,11 @@
       </section>
     </main>
 
-    <dialog class="admin-dialog" id="adminDialog" aria-labelledby="adminTitle">
-      <form class="admin-panel" id="productForm" method="dialog">
-        <div class="dialog-head">
-          <div>
-            <p class="eyebrow">Painel da loja</p>
-            <h2 id="adminTitle">Adicionar produto</h2>
-          </div>
-          <button class="icon-button" id="closeAdmin" type="button" aria-label="Fechar">x</button>
-        </div>
-
-        <div class="form-grid">
-          <label>
-            Nome do artigo
-            <input id="name" required placeholder="Ex: Vestido elegante">
-          </label>
-          <label>
-            Categoria
-            <select id="category" required>
-              <option>Roupas</option>
-              <option>Calcados</option>
-              <option>Bijuterias</option>
-              <option>Capas de celular</option>
-              <option>Airpods</option>
-              <option>Outros</option>
-            </select>
-          </label>
-          <label>
-            Valor
-            <input id="price" required placeholder="Ex: 850 MT">
-          </label>
-          <label>
-            Tamanhos ou modelos
-            <input id="sizes" placeholder="Ex: P, M, G ou iPhone 11">
-          </label>
-          <label class="full">
-            Descricao / detalhes
-            <textarea id="description" rows="4" placeholder="Cor, material, estado, personalizacao, disponibilidade..."></textarea>
-          </label>
-          <label class="full file-picker">
-            Foto do artigo
-            <input id="photo" type="file" accept="image/*">
-            <span id="photoName">Escolher imagem</span>
-          </label>
-        </div>
-
-        <div class="preview-row">
-          <img id="photoPreview" alt="Pre-visualizacao do produto">
-          <p>As fotos adicionadas ficam guardadas neste navegador. Para publicar produtos para todos verem online, use a opcao exportar e atualize o ficheiro do site, ou ligue o site a uma base de dados.</p>
-        </div>
-
-        <div class="dialog-actions">
-          <button class="secondary-button" id="exportProducts" type="button">Exportar catalogo</button>
-          <button class="primary-button" type="submit">Guardar produto</button>
-        </div>
-      </form>
-    </dialog>
-
     <footer class="footer">
       <span>DETTY ELEGANCE</span>
       <span>A sua satisfacao e o nosso maior prazer</span>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

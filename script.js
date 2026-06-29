@@ -1,3 +1,5 @@
+import { isFirebaseReady, watchProducts } from "./firebase-service.js";
+
 const STORAGE_KEY = "detty-elegance-products";
 
 const defaultProducts = [
@@ -39,68 +41,42 @@ const defaultProducts = [
   }
 ];
 
-let products = loadProducts();
+let products = loadLocalProducts();
 let activeCategory = "Todos";
-let imageData = "";
 
 const grid = document.querySelector("#productGrid");
 const filters = document.querySelector("#categoryFilters");
 const searchInput = document.querySelector("#searchInput");
 const emptyState = document.querySelector("#emptyState");
-const adminDialog = document.querySelector("#adminDialog");
-const productForm = document.querySelector("#productForm");
-const photoInput = document.querySelector("#photo");
-const photoPreview = document.querySelector("#photoPreview");
-const photoName = document.querySelector("#photoName");
 
-document.querySelector("#openAdmin").addEventListener("click", () => adminDialog.showModal());
-document.querySelector("#closeAdmin").addEventListener("click", () => adminDialog.close());
-document.querySelector("#exportProducts").addEventListener("click", exportProducts);
 searchInput.addEventListener("input", renderProducts);
-
-photoInput.addEventListener("change", (event) => {
-  const file = event.target.files[0];
-  if (!file) {
-    return;
-  }
-
-  photoName.textContent = file.name;
-  const reader = new FileReader();
-  reader.onload = () => {
-    imageData = reader.result;
-    photoPreview.src = imageData;
-  };
-  reader.readAsDataURL(file);
-});
-
-productForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const product = {
-    id: newId(),
-    name: document.querySelector("#name").value.trim(),
-    category: document.querySelector("#category").value,
-    price: document.querySelector("#price").value.trim(),
-    sizes: document.querySelector("#sizes").value.trim(),
-    description: document.querySelector("#description").value.trim(),
-    image: imageData || productSvg(document.querySelector("#name").value.trim(), "#b8325f", "#f7eadc")
-  };
-
-  products = [product, ...products];
-  saveProducts();
-  productForm.reset();
-  imageData = "";
-  photoPreview.removeAttribute("src");
-  photoName.textContent = "Escolher imagem";
-  adminDialog.close();
-  renderFilters();
-  renderProducts();
-});
 
 renderFilters();
 renderProducts();
+loadOnlineProducts();
 
-function loadProducts() {
+async function loadOnlineProducts() {
+  if (!isFirebaseReady()) {
+    return;
+  }
+
+  try {
+    await watchProducts((onlineProducts) => {
+      if (!onlineProducts.length) {
+        return;
+      }
+
+      products = onlineProducts;
+      activeCategory = activeCategoryExists(activeCategory) ? activeCategory : "Todos";
+      renderFilters();
+      renderProducts();
+    });
+  } catch (error) {
+    console.warn("Nao foi possivel carregar produtos online.", error);
+  }
+}
+
+function loadLocalProducts() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (!stored) {
     return defaultProducts;
@@ -112,10 +88,6 @@ function loadProducts() {
   } catch {
     return defaultProducts;
   }
-}
-
-function saveProducts() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
 }
 
 function renderFilters() {
@@ -171,15 +143,8 @@ function renderProducts() {
   });
 }
 
-function exportProducts() {
-  const data = JSON.stringify(products, null, 2);
-  const blob = new Blob([data], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "catalogo-detty-elegance.json";
-  link.click();
-  URL.revokeObjectURL(url);
+function activeCategoryExists(category) {
+  return category === "Todos" || products.some((product) => product.category === category);
 }
 
 function productSvg(label, color, background) {

@@ -8,15 +8,27 @@ Abra o ficheiro `index.html` no navegador.
 
 ## Como adicionar produtos
 
-1. Clique no botao `+` no canto superior direito.
-2. Preencha nome, categoria, valor, tamanhos/modelos e descricao.
-3. Escolha uma foto.
-4. Clique em `Guardar produto`.
+O site agora tem um painel em `admin.html`.
 
-Nesta primeira versao, os produtos adicionados ficam guardados no navegador usado para cadastrar. Para que todos vejam os produtos novos pela internet, ha duas opcoes:
+Para o painel guardar produtos online para todos verem, configure o Firebase:
 
-- publicar novamente o site com o catalogo exportado;
-- ligar o site a uma base de dados online, como Firebase, Supabase ou um painel administrativo proprio.
+1. Crie um projeto no Firebase.
+2. Ative Authentication com login por Email/Senha.
+3. Crie o usuario administrador.
+4. Ative Firestore Database.
+5. Ative Storage.
+6. Copie a configuracao Web do Firebase para `firebase-config.js`.
+7. Publique novamente no GitHub.
+
+Depois disso:
+
+1. Abra `admin.html`.
+2. Entre com o email e senha do administrador.
+3. Preencha nome, categoria, valor, tamanhos/modelos e descricao.
+4. Escolha uma foto.
+5. Clique em `Guardar produto`.
+
+Os produtos guardados no painel aparecem automaticamente no site publico.
 
 ## Como publicar na internet
 
