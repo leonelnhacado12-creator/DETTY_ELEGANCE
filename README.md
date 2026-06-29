@@ -16,9 +16,10 @@ Para o painel guardar produtos online para todos verem, configure o Firebase:
 2. Ative Authentication com login por Email/Senha.
 3. Crie o usuario administrador.
 4. Ative Firestore Database.
-5. Ative Storage.
-6. Copie a configuracao Web do Firebase para `firebase-config.js`.
-7. Publique novamente no GitHub.
+5. Copie a configuracao Web do Firebase para `firebase-config.js`.
+6. Publique novamente no GitHub.
+
+O Firebase Storage pode pedir upgrade de plano. Para manter gratis, use o campo `Link da foto` no painel em vez de enviar ficheiro.
 
 Depois disso:
 

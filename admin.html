@@ -81,16 +81,20 @@
                 Descricao / detalhes
                 <textarea id="description" rows="4" placeholder="Cor, material, estado, personalizacao, disponibilidade..."></textarea>
               </label>
+              <label class="full">
+                Link da foto
+                <input id="imageUrl" type="url" placeholder="https://exemplo.com/foto-do-produto.jpg">
+              </label>
               <label class="full file-picker">
-                Foto do artigo
-                <input id="photo" type="file" accept="image/*" required>
-                <span id="photoName">Escolher imagem</span>
+                Foto do artigo no computador
+                <input id="photo" type="file" accept="image/*">
+                <span id="photoName">Opcional: escolher imagem</span>
               </label>
             </div>
 
             <div class="preview-row">
               <img id="photoPreview" alt="Pre-visualizacao do produto">
-              <p>Use fotos claras e bem iluminadas. Depois de guardar, o produto entra no catalogo publico.</p>
+              <p>Para continuar gratis, use um link de imagem. O envio direto de ficheiros pelo Firebase Storage pode pedir upgrade de plano.</p>
             </div>
 
             <div class="dialog-actions">

@@ -77,16 +77,17 @@ productForm.addEventListener("submit", async (event) => {
       category: document.querySelector("#category").value,
       price: document.querySelector("#price").value.trim(),
       sizes: document.querySelector("#sizes").value.trim(),
-      description: document.querySelector("#description").value.trim()
+      description: document.querySelector("#description").value.trim(),
+      image: document.querySelector("#imageUrl").value.trim()
     };
 
     await saveProduct(product, photoInput.files[0]);
     productForm.reset();
-    photoName.textContent = "Escolher imagem";
+    photoName.textContent = "Opcional: escolher imagem";
     photoPreview.removeAttribute("src");
     saveMessage.textContent = "Produto guardado com sucesso.";
   } catch (error) {
-    saveMessage.textContent = "Erro ao guardar. Verifique a configuracao do Firebase.";
+    saveMessage.textContent = "Erro ao guardar. Se nao ativou Storage, use apenas link de imagem.";
     console.error(error);
   } finally {
     saveButton.disabled = false;

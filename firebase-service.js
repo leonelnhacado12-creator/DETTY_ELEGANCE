@@ -52,7 +52,7 @@ export async function saveProduct(product, imageFile) {
     uploadBytes
   } = await loadFirebase();
 
-  let image = product.image || "";
+  let image = product.image || fallbackProductImage(product.name);
 
   if (imageFile) {
     const extension = imageFile.name.split(".").pop() || "jpg";
@@ -67,6 +67,28 @@ export async function saveProduct(product, imageFile) {
     image,
     createdAt: serverTimestamp()
   });
+}
+
+function fallbackProductImage(label) {
+  const safeLabel = String(label || "Produto")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;")
+    .slice(0, 18);
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="720" height="860" viewBox="0 0 720 860">
+      <rect width="720" height="860" fill="#f7eadc"/>
+      <circle cx="540" cy="170" r="82" fill="#d79b24" opacity=".72"/>
+      <rect x="145" y="160" width="430" height="520" rx="34" fill="#fffaf4" opacity=".92"/>
+      <path d="M222 590c88-134 174-132 258 0" fill="none" stroke="#b8325f" stroke-width="34" stroke-linecap="round"/>
+      <circle cx="280" cy="360" r="54" fill="#b8325f" opacity=".92"/>
+      <circle cx="436" cy="360" r="54" fill="#2f6f5e" opacity=".9"/>
+      <text x="360" y="735" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="800" fill="#191817">${safeLabel}</text>
+    </svg>
+  `;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
 export async function deleteProduct(productId) {
