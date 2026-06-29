@@ -19,7 +19,9 @@ Para o painel guardar produtos online para todos verem, configure o Firebase:
 5. Copie a configuracao Web do Firebase para `firebase-config.js`.
 6. Publique novamente no GitHub.
 
-O Firebase Storage pode pedir upgrade de plano. Para manter gratis, use o campo `Link da foto` no painel em vez de enviar ficheiro.
+O Firebase Storage pode pedir upgrade de plano. Para manter gratis, use o campo `Link ou caminho da foto` no painel em vez de enviar ficheiro.
+
+Tambem pode criar uma pasta `imagens` no projeto, colocar fotos nela e usar caminhos como `imagens/vestido.jpg` no painel.
 
 Depois disso:
 
