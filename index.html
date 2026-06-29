@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111111">
+    <meta name="description" content="DETTY ELEGANCE - loja virtual de roupas, calcados, bijuterias, capas para celulares, airpods e muito mais.">
+    <title>DETTY ELEGANCE | Loja Virtual</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="DETTY ELEGANCE">
+        <span class="brand-mark">DE</span>
+        <span>
+          <strong>DETTY ELEGANCE</strong>
+          <small>A sua satisfacao e o nosso maior prazer</small>
+        </span>
+      </a>
+
+      <nav class="nav-actions" aria-label="Navegacao principal">
+        <a href="#produtos">Produtos</a>
+        <a href="#contactos">Contactos</a>
+        <button class="icon-button" id="openAdmin" type="button" title="Gerir produtos" aria-label="Gerir produtos">
+          <span aria-hidden="true">+</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <div class="photo-tile clothes"></div>
+          <div class="photo-tile jewelry"></div>
+          <div class="photo-tile phone"></div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Moda, acessorios e presentes</p>
+          <h1>DETTY ELEGANCE</h1>
+          <p>Roupas, calcados, bijuterias, capas personalizadas, airpods e varios artigos escolhidos para deixar o teu estilo mais bonito.</p>
+          <div class="hero-buttons">
+            <a class="primary-button" href="#produtos">Ver produtos</a>
+            <a class="secondary-button" href="https://wa.me/258868824595" target="_blank" rel="noreferrer">Comprar pelo WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="store-strip" aria-label="Resumo da loja">
+        <div>
+          <strong>Entrega combinada</strong>
+          <span>Fale conosco para confirmar local e disponibilidade.</span>
+        </div>
+        <div>
+          <strong>Fotos reais</strong>
+          <span>Adicione imagens, tamanhos, preco e detalhes de cada artigo.</span>
+        </div>
+        <div>
+          <strong>Pedido rapido</strong>
+          <span>O cliente envia o produto escolhido direto para o WhatsApp.</span>
+        </div>
+      </section>
+
+      <section class="catalog-section" id="produtos">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Catalogo</p>
+            <h2>Artigos disponiveis</h2>
+          </div>
+          <div class="search-box">
+            <input id="searchInput" type="search" placeholder="Pesquisar produto..." aria-label="Pesquisar produto">
+          </div>
+        </div>
+
+        <div class="category-row" id="categoryFilters" aria-label="Categorias"></div>
+        <div class="product-grid" id="productGrid"></div>
+        <p class="empty-state" id="emptyState" hidden>Nenhum produto encontrado nesta pesquisa.</p>
+      </section>
+
+      <section class="contact-section" id="contactos">
+        <div>
+          <p class="eyebrow">Contactos</p>
+          <h2>Faca a sua encomenda</h2>
+          <p>Escolha o artigo, confirme detalhes e finalize a compra pelos nossos canais oficiais.</p>
+        </div>
+        <div class="contact-links">
+          <a href="https://wa.me/258868824595" target="_blank" rel="noreferrer">WhatsApp: 868824595</a>
+          <a href="https://wa.me/258873598409" target="_blank" rel="noreferrer">WhatsApp: 873598409</a>
+          <a href="https://www.instagram.com/detty_elegance" target="_blank" rel="noreferrer">Instagram: detty_elegance</a>
+          <a href="mailto:mayttaumbure@gmail.com">mayttaumbure@gmail.com</a>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="admin-dialog" id="adminDialog" aria-labelledby="adminTitle">
+      <form class="admin-panel" id="productForm" method="dialog">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Painel da loja</p>
+            <h2 id="adminTitle">Adicionar produto</h2>
+          </div>
+          <button class="icon-button" id="closeAdmin" type="button" aria-label="Fechar">x</button>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            Nome do artigo
+            <input id="name" required placeholder="Ex: Vestido elegante">
+          </label>
+          <label>
+            Categoria
+            <select id="category" required>
+              <option>Roupas</option>
+              <option>Calcados</option>
+              <option>Bijuterias</option>
+              <option>Capas de celular</option>
+              <option>Airpods</option>
+              <option>Outros</option>
+            </select>
+          </label>
+          <label>
+            Valor
+            <input id="price" required placeholder="Ex: 850 MT">
+          </label>
+          <label>
+            Tamanhos ou modelos
+            <input id="sizes" placeholder="Ex: P, M, G ou iPhone 11">
+          </label>
+          <label class="full">
+            Descricao / detalhes
+            <textarea id="description" rows="4" placeholder="Cor, material, estado, personalizacao, disponibilidade..."></textarea>
+          </label>
+          <label class="full file-picker">
+            Foto do artigo
+            <input id="photo" type="file" accept="image/*">
+            <span id="photoName">Escolher imagem</span>
+          </label>
+        </div>
+
+        <div class="preview-row">
+          <img id="photoPreview" alt="Pre-visualizacao do produto">
+          <p>As fotos adicionadas ficam guardadas neste navegador. Para publicar produtos para todos verem online, use a opcao exportar e atualize o ficheiro do site, ou ligue o site a uma base de dados.</p>
+        </div>
+
+        <div class="dialog-actions">
+          <button class="secondary-button" id="exportProducts" type="button">Exportar catalogo</button>
+          <button class="primary-button" type="submit">Guardar produto</button>
+        </div>
+      </form>
+    </dialog>
+
+    <footer class="footer">
+      <span>DETTY ELEGANCE</span>
+      <span>A sua satisfacao e o nosso maior prazer</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
