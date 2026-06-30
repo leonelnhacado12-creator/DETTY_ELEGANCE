@@ -1,4 +1,4 @@
-import { isFirebaseReady, watchProducts } from "./firebase-service.js";
+import { isFirebaseReady, watchProducts } from "./firebase-service.js?v=5";
 
 const STORAGE_KEY = "detty-elegance-products";
 

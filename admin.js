@@ -6,7 +6,7 @@ import {
   signInAdmin,
   signOutAdmin,
   watchProducts
-} from "./firebase-service.js";
+} from "./firebase-service.js?v=5";
 
 const setupAlert = document.querySelector("#setupAlert");
 const loginForm = document.querySelector("#loginForm");
