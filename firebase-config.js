@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyCS_Sm09wb--IIeqe1Jt2tpD7O1W6TeoVk",
+  apiKey: "AIzaSyCS_Sm09wb--ITeqelJt2tpD701W6TeoVk",
   authDomain: "detty-elegance.firebaseapp.com",
   projectId: "detty-elegance",
   storageBucket: "detty-elegance.firebasestorage.app",
