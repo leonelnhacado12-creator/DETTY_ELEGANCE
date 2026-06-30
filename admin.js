@@ -57,7 +57,7 @@ loginForm.addEventListener("submit", async (event) => {
     );
     loginMessage.textContent = "";
   } catch (error) {
-    loginMessage.textContent = "Nao foi possivel entrar. Confirme email e senha.";
+    loginMessage.textContent = loginErrorMessage(error);
     console.error(error);
   }
 });
@@ -148,4 +148,17 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function loginErrorMessage(error) {
+  const messages = {
+    "auth/invalid-credential": "Email ou senha incorretos.",
+    "auth/invalid-email": "Email invalido.",
+    "auth/user-not-found": "Este email nao existe nos usuarios do Firebase.",
+    "auth/wrong-password": "Senha incorreta.",
+    "auth/operation-not-allowed": "Ative o metodo E-mail/senha no Firebase Authentication.",
+    "auth/unauthorized-domain": "Autorize o dominio leonelnhacado12-creator.github.io no Firebase Authentication."
+  };
+
+  return messages[error.code] || `Nao foi possivel entrar: ${error.code || "erro desconhecido"}.`;
 }
