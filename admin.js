@@ -81,13 +81,13 @@ productForm.addEventListener("submit", async (event) => {
       image: document.querySelector("#imageUrl").value.trim()
     };
 
-    await saveProduct(product, photoInput.files[0]);
+    await withTimeout(saveProduct(product, photoInput.files[0]), 15000);
     productForm.reset();
     photoName.textContent = "Opcional: escolher imagem";
     photoPreview.removeAttribute("src");
     saveMessage.textContent = "Produto guardado com sucesso.";
   } catch (error) {
-    saveMessage.textContent = "Erro ao guardar. Se nao ativou Storage, use apenas link de imagem.";
+    saveMessage.textContent = saveErrorMessage(error);
     console.error(error);
   } finally {
     saveButton.disabled = false;
@@ -161,4 +161,28 @@ function loginErrorMessage(error) {
   };
 
   return messages[error.code] || `Nao foi possivel entrar: ${error.code || "erro desconhecido"}.`;
+}
+
+function saveErrorMessage(error) {
+  const messages = {
+    "permission-denied": "Sem permissao para guardar. Verifique as regras do Firestore.",
+    "unavailable": "Firebase indisponivel. Tente novamente.",
+    "deadline-exceeded": "Demorou muito para guardar. Verifique internet e regras do Firestore.",
+    "storage/unauthorized": "Sem permissao para enviar foto. Use link da foto em vez de ficheiro."
+  };
+
+  return messages[error.code] || `Erro ao guardar: ${error.code || error.message || "erro desconhecido"}.`;
+}
+
+function withTimeout(promise, timeoutMs) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => {
+      setTimeout(() => {
+        const error = new Error("Tempo limite ao guardar.");
+        error.code = "deadline-exceeded";
+        reject(error);
+      }, timeoutMs);
+    })
+  ]);
 }

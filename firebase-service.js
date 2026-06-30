@@ -54,7 +54,7 @@ export async function saveProduct(product, imageFile) {
 
   let image = product.image || fallbackProductImage(product.name);
 
-  if (imageFile) {
+  if (imageFile && !product.image) {
     const extension = imageFile.name.split(".").pop() || "jpg";
     const filePath = `products/${Date.now()}-${crypto.randomUUID()}.${extension}`;
     const storageRef = ref(storage, filePath);
