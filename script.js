@@ -126,7 +126,7 @@ function renderProducts() {
     const message = encodeURIComponent(`Ola DETTY ELEGANCE, tenho interesse neste artigo: ${product.name} - ${product.price}. Tamanhos/modelos: ${product.sizes || "a confirmar"}.`);
 
     card.innerHTML = `
-      <img src="${product.image}" alt="${escapeHtml(product.name)}">
+      <img src="${escapeHtml(product.image || productSvg(product.name || "Produto", "#b8325f", "#f7eadc"))}" alt="${escapeHtml(product.name)}">
       <div class="product-body">
         <span class="tag">${escapeHtml(product.category)}</span>
         <div class="product-meta">
@@ -138,6 +138,10 @@ function renderProducts() {
         <a class="buy-button" href="https://wa.me/258868824595?text=${message}" target="_blank" rel="noreferrer">Pedir no WhatsApp</a>
       </div>
     `;
+
+    card.querySelector("img").addEventListener("error", (event) => {
+      event.currentTarget.src = productSvg(product.name || "Produto", "#b8325f", "#f7eadc");
+    });
 
     grid.append(card);
   });
